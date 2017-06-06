@@ -1,4 +1,4 @@
-"use strict";
+
 /* app.js
  *
  * This is our RSS feed reader application. It uses the Google
@@ -29,6 +29,7 @@ var allFeeds = [
  * function when the API is loaded.
  */
 function init() {
+    "use strict";
     // Load the first feed we've defined (index of 0).
     loadFeed(0);
 }
@@ -42,6 +43,7 @@ function init() {
  * which will be called after everything has run successfully.
  */
  function loadFeed(id, cb) {
+    "use strict";
      var feedUrl = allFeeds[id].url,
          feedName = allFeeds[id].name;
 
@@ -94,6 +96,7 @@ google.setOnLoadCallback(init);
  * until the DOM is ready.
  */
 $(function() {
+    "use strict";
     var container = $('.feed'),
         feedList = $('.feed-list'),
         feedItemTemplate = Handlebars.compile($('.tpl-feed-list-item').html()),
@@ -134,6 +137,7 @@ $(function() {
 }());
 
 function errorFunctionFeedreader() {
+    "use strict";
     console.log('there was an error');
     alert('there was an error with loading the feedreader.js file');
 };
