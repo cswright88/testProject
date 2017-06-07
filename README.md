@@ -1,7 +1,7 @@
 # Test Project README
 
 ## How to run
-1. Go into the dist Directory and load the index.html file in chrome.  
+1. Go into the src Directory and load the index.html file in chrome.  
 
 
 ## Error Handling 

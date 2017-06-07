@@ -135,11 +135,3 @@ $(function() {
         $('body').toggleClass('menu-hidden');
     });
 }());
-
-function errorFunctionFeedreader() {
-    "use strict";
-    console.log('there was an error');
-    alert('there was an error with loading the feedreader.js file');
-};
-
-
