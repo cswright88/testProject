@@ -66,7 +66,7 @@ $(function() {
          */
         //make sure body class menu-hidden is already on when the doc loads
         it('is hidden by default', function() {
-            expect($('body').attr('class') === 'menu-hidden').toBe(true);
+            expect($('body').hasClass('menu-hidden')).toBe(true);
         });
 
          /* TODO: Write a test that ensures the menu changes
