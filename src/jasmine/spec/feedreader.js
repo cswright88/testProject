@@ -36,7 +36,8 @@ $(function() {
             //for loop through the allFeeds obj and test each have a url and it isn't just an empty string or something
             for (var i = 0; i < allFeeds.length; i++) {
                 expect(allFeeds[i].url).toBeDefined();
-                expect(allFeeds[i].url.length > 0).toBe(true);
+                // FIX: changed toBeGreaterThan instead as suggested by reviewer
+                expect(allFeeds[i].url.length).toBeGreaterThan(0);
             }
         });
 
@@ -49,7 +50,8 @@ $(function() {
             //for loop through the allFeeds obj and test each have a name and it isn't just an empty string or something
             for (var i = 0; i < allFeeds.length; i++) {
                 expect(allFeeds[i].name).toBeDefined();
-                expect(allFeeds[i].name.length > 0).toBe(true);
+                // FIX: changed toBeGreaterThan instead as suggested by reviewer
+                expect(allFeeds[i].name.length).toBeGreaterThan(0);
             }
         });
     });
@@ -75,9 +77,9 @@ $(function() {
         //do two click function and test that the menu-hidden class is off then on again
         it('toggles when clicked', function() { 
             $('.menu-icon-link').click();
-            expect($('body').attr('class') === 'menu-hidden').toBe(false);
+            expect($('body').hasClass('menu-hidden')).toBe(false);
             $('.menu-icon-link').click();
-            expect($('body').attr('class') === "menu-hidden").toBe(true);
+            expect($('body').hasClass('menu-hidden')).toBe(true);
         });
 
     });
@@ -92,14 +94,15 @@ $(function() {
          */
         beforeEach(function(done) {
             //load feed function called first using done to test async
-            loadFeed(0, function() {
-                done();
-            });
+            // FIX: called done inside the load feed right away to simplify the code
+            // FIX: suggested by the reviewer
+            loadFeed(0, done);
         });
-        it('have at least one entry element within the feed container', function(done){
+        it('have at least one entry element within the feed container', function(){
             // make sure there is at lease one entry in the feed
-            expect($('.feed').find('.entry').length > 0).toBe(true);
-            done();
+            //FIX: added to be greater than function as it was a suggestion from reviewer
+            expect($('.feed').find('.entry').length).toBeGreaterThan(0);
+            // FIX: removed the done due to it being redundanct- also removed from inside the function above
         });
 
     });
@@ -117,19 +120,22 @@ $(function() {
             loadFeed(0, function() {
                 //find the first entry's text and compare it to another feed
                 initial = $('.feed').find('.entry:first').text();
-            });
-            //load the next feed assuming there are two feeds available in the array
-            loadFeed(1, function() {
-                after = $('.feed').find('.entry:first').text();
-                //call done so that it can properly test with async
-                done();
+                //load the next feed assuming there are two feeds available in the array
+                // FIX: nested the second load feed inside the first so that I can call done inside it
+                loadFeed(1, function() {
+                    after = $('.feed').find('.entry:first').text();
+                    //call done so that it can properly test with async
+                    done();
+                });
             });
 
+
         });
-        it('loads new content on the next feed', function(done) {
+        it('loads new content on the next feed', function() {
             //test if after is not equal to intial and if thats true the test passes
-            expect(after != initial).toBe(true);
-            done();
+            // FIX: changed dto a notEqual function 
+            expect(after).not.toEqual(initial);
+            // FIX: removed the done due to it being redundanct- also removed from inside the function above
         });
     });    
 }());
